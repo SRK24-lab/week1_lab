@@ -4,6 +4,9 @@ body {
 }
 
 h1 {
-    color: blue;
     font-size: 40px;
+}
+
+.cool_font {
+    font-family: "Coral Pixels", serif;
 }

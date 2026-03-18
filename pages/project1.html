@@ -39,7 +39,7 @@
         <section class="lab-images">
             <div class="screenshot-grid">
                 <figure>
-                    <img src="../images/project1/concept_sketch.png" alt="concept sketch of gameplay in rectum for the video game" id="rectum_concept">
+                    <img src="../images/project1/concept_sketch.png" alt="concept sketch of gameplay in rectum for the video game" id="project_img">
                     <figcaption>Concept image for video game project</figcaption>
                 </figure>
             </div>
@@ -116,6 +116,52 @@
 
             <p>
                 In terms of our game scope being too large, we definitely agree. We initially decided on storyboarding the entire game, but only developing one level. However, after receiving feedback, we think that our best option is to focus all of our time and energy onto one level only. We have decided on doing preproduction and development of the stomach level, as it contains many of the learning objectives that we would like to present in our game. In this way, our minimum viable product (MVP) would be the stomach level that a player could interact with, and this would allow us to gauge whether we could translate this experience to the other levels, or if we would need to make changes before beginning planning of the rest of the game. 
+            </p>
+        </section>
+
+        <section class="lab-header">
+            <h1>Project Entry 2</h1>
+            <p class="lab-date">18/March/2026</p>
+        </section>
+
+        <section class="lab-images">
+            <div class="screenshot-grid">
+                <figure>
+                    <img src="../images/project2/unity_video.png" alt="concept sketch of gameplay in rectum for the video game" id="project_img">
+                    <figcaption>Concept image for video game project</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="lab-reflection">
+            <h1>Reflection</h1>
+            <p>
+                I was tasked with figuring out how to play video files inside Unity. The context of this in regards to our project would be to figure out a way to show video cut scenes during the gameplay. 
+            </p>
+
+            <p>
+                Unfortunately, playing videos in Unity is not as simple as telling Unity that you have a video file to display. After some research, I figure out that using UI element in Unity would be my best bet. I found 2 video that guided my experimentation. The first is <a href="https://www.youtube.com/watch?v=-XzVq7qIuys">this one</a> by Solo Game Dev on Youtube. This video described how to use the Canvas element in Unity, coupled with the VideoPlayer component. From what I understand, by importing a video file into Unity, and connecting it to a VideoPlayer component, the VideoPlayer can then target the video to a RenderTexture, which can then be connected to a RawImage that will show the video within the Canvas element. 
+
+                <img src="../images/project2/unity-flowchart-01.jpg" alt="concept of how video is implemented in Unity's UI Canvas system">
+            </p>
+
+            <p>
+                The second video I foun was <a href="https://www.youtube.com/watch?v=yUXFHAOXhcA">this</a> by MadCat Tutorials on Youtube. In this video, he showed Unity's newer way of implementing UI by using the UIBuilder tool. The UIBuilder tool creates UXML files that would allow you to design layouts for each UI interface needed. In this way, UI components could be separated from game components, which seemed to be a good way to approach designing for this problem.
+
+            <p>
+                In the end, I decided to implement a combination of both videos. I would use the UIBuilder to create the UI layouts (rather than using Canvas components) and then to link the videos into these UI layouts, I would use the VideoPlayer/RenderTexture method. In essence, I would use the UIBuilder to create a UXML file for each "cutscene" that would need to be shown during gameplay. These would be labelled by the scene number, for ease. Within each of these files, I would attach an ImageComponent, which I would then link the specific video's RenderTexture to. Now, with the UXML file associated with a specific video, I would link it to a UI Document component so that it could be displayed on the screen. 
+            </p>
+
+            <p>
+                I assume that by changing the UXML file linked to the UI document (via scripting), you can change what cutscene will be played from the UI Document. This makes it so that you have one UI Document component that you can call upon when a cutscene needs to be show, and then you use a script within this component to call upon a specific UXML file to show a particular video.
+            </p>
+
+            <p>
+                As a backup solution, the first youtube video I mentioned by Solo Game Dev also mentioned a method in which each video file would be associated with a VideoPlayer Component. Each VideoPlayer would have their Render Mode changed from Render Texture to Camera Near Plane. Then you can link the Main Scene camera with a specific VideoPlayer to show the requried cutscene. This would avoid the use of Canvas components or additional UXML files, keeping the file structure in the project cleaner.
+            </p>
+
+            <p>
+                One issue that I've found in testing either of these methods is that sound begins playing when the game is instanced. This means that even if a cutscene isn't being asked to play, because it is connected to a VideoPlayer that is instanced when the game loads, the video is also being played in the background - meaning the sound will play. I assume this is something that can be addressed with scripting by reseting the video playing sound when it moves to another video, but this could be problematic. I will need to discuss this with the rest of the scripting team to see if this can be resolved, or if another method for video playing in Unity is needed.
             </p>
         </section>
     </main>
